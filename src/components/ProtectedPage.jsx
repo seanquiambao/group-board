@@ -1,16 +1,35 @@
 "use client";
 import Navigation from "@/components/Navigation";
 import { usePathname } from "next/navigation";
+import { useSession, signIn } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 const ProtectedPage = ({ children }) => {
   const pathname = usePathname();
   const regex = new RegExp("/room/*");
   const header = regex.test(pathname);
+  const { status } = useSession();
+  const [confirmed, setConfirmed] = useState(false);
+
+  useEffect(() => {
+    if (status === "loading") return;
+    if (status !== "authenticated") {
+      void signIn("google");
+      return;
+    }
+    setConfirmed(true);
+  }, [status]);
+
   return (
-    <div className="flex flex-col h-screen">
-      {!header && <Navigation />}
-      {children}
-    </div>
+    <>
+      {status === "loading" && <>loading</>}
+      {confirmed && (
+        <div className="flex flex-col h-screen">
+          {!header && <Navigation />}
+          {children}
+        </div>
+      )}
+    </>
   );
 };
 

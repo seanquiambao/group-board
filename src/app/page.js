@@ -9,10 +9,9 @@ const Home = () => {
       <div className="text-4xl text-black">
         whiteboard together all in one web app
       </div>
-      <Link href="/dashboard">dashboard</Link>
       <button
         className="bg-board-blue-200 text-white text-2xl font-semibold py-3 px-7 rounded-2xl hover:-translate-y-1 duration-300"
-        onClick={() => signIn("google")}
+        onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
       >
         sign into google
       </button>
