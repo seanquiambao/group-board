@@ -1,3 +1,5 @@
+"use client";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 
 const Home = () => {
@@ -7,12 +9,12 @@ const Home = () => {
       <div className="text-4xl text-black">
         whiteboard together all in one web app
       </div>
-      <Link
+      <button
         className="bg-board-blue-200 text-white text-2xl font-semibold py-3 px-7 rounded-2xl hover:-translate-y-1 duration-300"
-        href="/dashboard"
+        onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
       >
         sign into google
-      </Link>
+      </button>
     </div>
   );
 };

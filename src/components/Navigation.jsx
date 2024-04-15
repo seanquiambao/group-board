@@ -1,3 +1,5 @@
+"use client";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { FiLogOut } from "react-icons/fi";
 
@@ -14,12 +16,12 @@ const Navigation = () => {
         >
           Join
         </Link>
-        <Link
-          href="/"
+        <button
+          onClick={() => signOut({ callbackUrl: "/" })}
           className="drop-shadow-md p-3 rounded-xl bg-white h-fit w-fit text-xl hover:bg-board-red hover:text-white hover:-translate-y-0.5 duration-300"
         >
           <FiLogOut />
-        </Link>
+        </button>
       </div>
     </div>
   );
