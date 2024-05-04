@@ -12,7 +12,6 @@ export const authenticate = async () => {
   return {
     message: null,
     auth: 200,
-    uid: session.user.id,
     user: session.user,
   };
 };
