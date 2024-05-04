@@ -8,7 +8,6 @@ export const authenticate = async () => {
     return { message: "Invalid Authentication Credentials.", auth: 401 };
   }
 
-  console.log(session.user);
   return {
     message: null,
     auth: 200,

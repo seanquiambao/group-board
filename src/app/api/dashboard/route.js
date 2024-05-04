@@ -8,6 +8,7 @@ import {
 } from "firebase/firestore";
 import { NextResponse } from "next/server";
 import { authenticate } from "@/utils/auth";
+import { FieldValue } from "firebase-admin/firestore";
 export async function POST(request) {
   const res = NextResponse;
   const { auth, message, user } = await authenticate();
@@ -21,11 +22,11 @@ export async function POST(request) {
 
   try {
     const newRoom = {
-      users: [],
       roles: {
         admin: [user.id],
         editor: [],
       },
+      created: new Date(),
     };
     const docRef = await addDoc(collection(db, "rooms"), newRoom);
     await updateDoc(doc(db, "users", user.id), {
