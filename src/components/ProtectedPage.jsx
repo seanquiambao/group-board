@@ -1,5 +1,6 @@
 "use client";
 import Navigation from "@/components/Navigation";
+import Loading from "@/components/Loading";
 import { usePathname } from "next/navigation";
 import { useSession, signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
@@ -22,7 +23,7 @@ const ProtectedPage = ({ children }) => {
 
   return (
     <>
-      {status === "loading" && <>loading</>}
+      {status === "loading" && <Loading />}
       {confirmed && (
         <div className="flex flex-col h-screen">
           {!header && <Navigation />}
