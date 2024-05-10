@@ -2,7 +2,7 @@
 import { useDraw } from "@/hooks/useDraw";
 
 const Canvas = () => {
-  const { canvasRef } = useDraw(drawLine);
+  const { canvasRef, onMouseDown } = useDraw(drawLine);
 
   function drawLine({ prevPoint, currentPoint, ctx }) {
     const { x: currX, y: currY } = currentPoint;
@@ -23,7 +23,16 @@ const Canvas = () => {
     ctx.fill();
   }
   return (
-    <canvas ref={canvasRef} width="500" height="500" className="bg-white" />
+    <div className="flex justify-center items-center h-full">
+      <canvas
+        onMouseDown={onMouseDown}
+        ref={canvasRef}
+        width="1000"
+        height="500"
+        className="bg-white"
+        style={{ "image-rendering": "pixelated" }}
+      />
+    </div>
   );
 };
 
