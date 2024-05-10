@@ -7,6 +7,7 @@ import { api } from "@/utils/api";
 import { toast } from "react-hot-toast";
 import { useState, useEffect } from "react";
 import Fault from "@/utils/fault";
+import useSWR from "swr";
 
 const handleCreate = () => {
   api({
@@ -17,23 +18,14 @@ const handleCreate = () => {
     .catch(() => toast("❌ Internal Server Error"));
 };
 
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const Dashboard = () => {
-  const [rooms, setRooms] = useState(null);
+  const { data, error } = useSWR("/api/dashboard", fetcher);
   const { data: session } = useSession();
-  const load = () => {
-    api({
-      method: "GET",
-      url: "/api/dashboard",
-    }).then((response) => {
-      if (response.message !== "OK") {
-        throw new Fault(500, "Internal Server Error", "Contact Developers");
-      }
-      setRooms(response.items.rooms);
-    });
-  };
-  useEffect(() => {
-    load();
-  }, []);
+  const [rooms, setRooms] = useState([]);
+  if (error) {
+    throw new Fault(500, "Internal Server Error", "Contact Developers");
+  }
 
   return (
     <div className="flex flex-col items-start justify-center ml-[10%] h-2/3 gap-y-6">
@@ -50,12 +42,20 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="text-black text-4xl font-semibold">Your Rooms</div>
-      <div className="flex flex-row gap-x-4 w-full items-center">
-        {rooms?.map((room, index) => (
-          <Card key={index} id={room} />
-        ))}
-        <Create handleClick={handleCreate} />
-      </div>
+      {error && <div>Something went wrong</div>}
+      {!data && <div>Loading</div>}
+      {data && (
+        <div className="flex flex-row gap-x-4 w-full items-center">
+          {data.items.rooms?.map((room, index) => (
+            <Card
+              key={index}
+              id={room}
+              handleDelete={() => console.log("Deleted!")}
+            />
+          ))}
+          {data.items.rooms.length < 3 && <Create handleClick={handleCreate} />}
+        </div>
+      )}
     </div>
   );
 };
