@@ -33,7 +33,7 @@ const Canvas = () => {
         width="512"
         height="512"
         className="bg-white"
-        style={{ "image-rendering": "pixelated", width: 1024, height: 1024 }}
+        style={{ imageRendering: "pixelated", width: 512, height: 512 }}
       />
     </div>
   );
