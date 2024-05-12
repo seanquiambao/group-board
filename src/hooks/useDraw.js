@@ -19,7 +19,6 @@ export const useDraw = (onDraw) => {
         return;
       }
 
-      console.log("on point!");
       onDraw({ ctx, currentPoint, prevPoint: prevPoint.current });
       prevPoint.current = currentPoint;
     };

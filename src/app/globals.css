@@ -1,9 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-canvas {
-  image-rendering: -moz-crisp-edges; /* FF 6.0+                       */
-  image-rendering: pixelated; /* Awesome future-browsers       */
-  -ms-interpolation-mode: nearest-neighbor; /* IE                            */
-}
