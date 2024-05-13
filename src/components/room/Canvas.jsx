@@ -1,6 +1,6 @@
 "use client";
 import { useDraw } from "@/hooks/useDraw";
-import { distanceBetween, angleBetween } from "@/utils/math";
+
 import { TOOLS } from "@/utils/room/tools";
 
 const Canvas = ({ tools, setTools }) => {

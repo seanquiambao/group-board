@@ -1,4 +1,4 @@
-import { TOOLS } from "@/data/tools";
+import { TOOLS } from "@/data/room/tools";
 
 const Toolbar = ({ tools, setTools }) => {
   return (
