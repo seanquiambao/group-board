@@ -1,6 +1,5 @@
 "use client";
 import { useDraw } from "@/hooks/useDraw";
-import { TOOLS } from "@/utils/room/tools";
 
 const Canvas = ({ brush, tools, setTools }) => {
   const { canvasRef, onMouseDown } = useDraw(brush.currentTool(brush.tool));
