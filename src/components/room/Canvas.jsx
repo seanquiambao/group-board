@@ -2,7 +2,7 @@
 import { useDraw } from "@/hooks/useDraw";
 
 const Canvas = ({ brush, tools, setTools }) => {
-  const { canvasRef, onMouseDown } = useDraw(brush.currentTool(brush.tool));
+  const { canvasRef, onMouseDown } = useDraw(brush.currentTool());
 
   return (
     <div className="flex justify-center items-center h-full">

@@ -46,8 +46,8 @@ export default class Brush {
     this.drawLine({ prevPoint, currentPoint, ctx });
   }
 
-  currentTool(tool) {
+  currentTool() {
     const TOOLS = [this.pencil, this.pencil, this.erase];
-    return TOOLS[tool];
+    return TOOLS[this.tool];
   }
 }
