@@ -1,30 +1,11 @@
 "use client";
 import { useDraw } from "@/hooks/useDraw";
-import { distanceBetween, angleBetween } from "@/helpers/math";
+import { distanceBetween, angleBetween } from "@/utils/math";
+import { TOOLS } from "@/utils/room/tools";
 
-const Canvas = () => {
-  const { canvasRef, onMouseDown } = useDraw(drawLine);
+const Canvas = ({ tools, setTools }) => {
+  const { canvasRef, onMouseDown } = useDraw(TOOLS[tools]);
 
-  function drawLine({ prevPoint, currentPoint, ctx }) {
-    const { x: currX, y: currY } = currentPoint;
-    const lineColor = "#000";
-    const size = 25;
-
-    let startPoint = prevPoint ?? currentPoint;
-    const halfSize = size / 2;
-    ctx.strokeStyle = lineColor;
-    const x = startPoint.x - halfSize;
-    const y = startPoint.y - halfSize;
-    ctx.fillRect(Math.round(x), Math.round(y), size, size);
-
-    const dist = distanceBetween(startPoint, currentPoint);
-    const angle = angleBetween(startPoint, currentPoint);
-    for (let i = 0; i < dist; ++i) {
-      const x = startPoint.x + Math.sin(angle) * i - halfSize;
-      const y = startPoint.y + Math.cos(angle) * i - halfSize;
-      ctx.fillRect(Math.round(x), Math.round(y), size, size);
-    }
-  }
   return (
     <div className="flex justify-center items-center h-full">
       <canvas

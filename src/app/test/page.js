@@ -8,7 +8,7 @@ const Page = () => {
   return (
     <div className="w-screen h-screen bg-board-blue-100 relative">
       <Toolbar tools={tools} setTools={setTools} />
-      <Canvas />
+      <Canvas tools={tools} setTools={setTools} />
     </div>
   );
 };
