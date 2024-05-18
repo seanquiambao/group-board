@@ -5,15 +5,15 @@ const style = "text-lg";
 
 export const TOOLS = [
   {
-    name: "Pencil",
+    name: "pencil",
     icon: <FaPencilAlt className={style} />,
   },
   {
-    name: "Brush",
+    name: "brush",
     icon: <FaPaintBrush className={style} />,
   },
   {
-    name: "Eraser",
+    name: "eraser",
     icon: <BsFillEraserFill className={style} />,
   },
 ];

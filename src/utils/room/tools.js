@@ -47,7 +47,11 @@ export default class Brush {
   }
 
   currentTool() {
-    const TOOLS = [this.pencil, this.pencil, this.erase];
+    const TOOLS = {
+      pencil: this.pencil,
+      brush: this.pencil,
+      eraser: this.erase,
+    };
     return TOOLS[this.tool];
   }
 }

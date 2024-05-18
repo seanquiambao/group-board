@@ -8,7 +8,8 @@ import { useEffect, useState } from "react";
 const PROPERTIES = {
   size: 5,
   color: "#000000",
-  tool: 0,
+  tool: "brush",
+  pattern: 0,
 };
 
 const Page = () => {
