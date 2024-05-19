@@ -9,10 +9,10 @@ const Canvas = ({ brush, tools, setTools }) => {
       <canvas
         onMouseDown={onMouseDown}
         ref={canvasRef}
-        width="512"
+        width="1080"
         height="512"
         className="bg-white"
-        style={{ imageRendering: "pixelated", width: 512, height: 512 }}
+        style={{ imageRendering: "pixelated", width: 1080, height: 512 }}
       />
     </div>
   );
