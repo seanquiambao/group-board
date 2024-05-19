@@ -9,10 +9,6 @@ export const TOOLS = [
     icon: <FaPencilAlt className={style} />,
   },
   {
-    name: "brush",
-    icon: <FaPaintBrush className={style} />,
-  },
-  {
     name: "eraser",
     icon: <BsFillEraserFill className={style} />,
   },

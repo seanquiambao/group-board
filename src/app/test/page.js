@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 const PROPERTIES = {
   size: 5,
   color: "#000000",
-  tool: "brush",
+  tool: "pencil",
   pattern: 0,
 };
 

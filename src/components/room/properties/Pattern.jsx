@@ -8,7 +8,7 @@ const Pattern = ({ tools, setTools }) => {
       <div className="flex flex-row gap-x-2">
         {PATTERNS.map((pattern, index) => (
           <Image
-            alt="pattern"
+            alt={`pattern ${index}`}
             src={pattern.img}
             width={35}
             height={35}
