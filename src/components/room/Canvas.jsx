@@ -34,7 +34,6 @@ const Canvas = ({ tools, setTools }) => {
   };
 
   const pencil = ({ prevPoint, currentPoint, ctx }) => {
-    console.log("DRAW");
     ctx.globalCompositeOperation = "source-over";
     const patternCanvas = generatePattern(tools.pattern);
     ctx.fillStyle = patternCanvas
