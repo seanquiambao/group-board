@@ -9,7 +9,6 @@ export const useDraw = (onDraw) => {
   const onMouseDown = () => setMouseDown(true);
 
   const clear = () => {
-    console.log("callled");
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvasRef.current.getContext("2d");
