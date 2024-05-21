@@ -7,6 +7,7 @@ import { useDraw } from "@/hooks/useDraw";
 import Menu from "@/components/room/Menu";
 import { distanceBetween, angleBetween } from "@/utils/math";
 import { PATTERNS } from "@/data/room/pattern";
+import Popup from "@/components/Popup";
 
 const PROPERTIES = {
   size: 5,
@@ -15,8 +16,18 @@ const PROPERTIES = {
   pattern: 0,
 };
 
+const POPUP = {
+  title: "",
+  message: "",
+  color: "",
+  visible: false,
+  onClick: () => {},
+  button: "",
+};
+
 const Page = () => {
   const [tools, setTools] = useState(PROPERTIES);
+  const [popup, setPopup] = useState(POPUP);
 
   const generatePattern = (index) => {
     let patternCanvas = document.createElement("canvas");
@@ -87,7 +98,10 @@ const Page = () => {
 
   return (
     <div className="w-screen h-screen bg-board-blue-100 relative">
-      <Menu clearFn={clear} />
+      {popup.visible && (
+        <Popup popup={popup} setPopup={setPopup} onClick={popup.onClick} />
+      )}
+      <Menu clearFn={clear} popup={popup} setPopup={setPopup} />
       <Toolbar tools={tools} setTools={setTools} />
       <Canvas canvasRef={canvasRef} onMouseDown={onMouseDown} />
       <Properties tools={tools} setTools={setTools} />

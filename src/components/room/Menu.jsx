@@ -6,27 +6,37 @@ import { HiOutlinePlusCircle } from "react-icons/hi2";
 
 const iconStyle = "text-lg";
 
-const Menu = ({ clearFn }) => {
+const Menu = ({ clearFn, popup, setPopup }) => {
   const [show, setShow] = useState(false);
 
+  const confirmClear = () => {
+    setPopup({
+      title: "Clear Canvas",
+      message: "This action is irreversible. You may lose unsaved progress.",
+      color: "bg-board-red text-white",
+      visible: true,
+      onClick: clearFn,
+      button: "clear",
+    });
+  };
   const MENU = [
     {
       name: "Save Art",
       icon: <MdSaveAlt className={iconStyle} />,
       style: "",
-      fn: clearFn,
+      fn: confirmClear,
     },
     {
       name: "Post your Art",
       icon: <HiOutlinePlusCircle className={iconStyle} />,
       style: "",
-      fn: clearFn,
+      fn: confirmClear,
     },
     {
       name: "Clear Canvas",
       icon: <IoMdTrash className={iconStyle} />,
       style: "text-board-red",
-      fn: clearFn,
+      fn: confirmClear,
     },
   ];
 
