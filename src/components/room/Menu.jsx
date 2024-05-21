@@ -1,9 +1,34 @@
 import { IoMenu } from "react-icons/io5";
 import { useState } from "react";
-import { MENU } from "@/data/room/menu";
+import { IoMdTrash } from "react-icons/io";
+import { MdSaveAlt } from "react-icons/md";
+import { HiOutlinePlusCircle } from "react-icons/hi2";
 
-const Menu = () => {
+const iconStyle = "text-lg";
+
+const Menu = ({ clearFn }) => {
   const [show, setShow] = useState(false);
+
+  const MENU = [
+    {
+      name: "Save Art",
+      icon: <MdSaveAlt className={iconStyle} />,
+      style: "",
+      fn: clearFn,
+    },
+    {
+      name: "Post your Art",
+      icon: <HiOutlinePlusCircle className={iconStyle} />,
+      style: "",
+      fn: clearFn,
+    },
+    {
+      name: "Clear Canvas",
+      icon: <IoMdTrash className={iconStyle} />,
+      style: "text-board-red",
+      fn: clearFn,
+    },
+  ];
 
   return (
     <div className="absolute flex flex-col w-1/12 gap-y-5 items-center top-5 right-0">
@@ -16,17 +41,14 @@ const Menu = () => {
       {show && (
         <div className="flex flex-col rounded-lg text-sm p-1.5 w-36 bg-white drop-shadow-md gap-y-2">
           {MENU.map((menu, index) => (
-            <div
+            <button
               key={index}
               className={`${menu.style} flex cursor-pointer items-center brightness-100 py-1.5 px-1.5 bg-white rounded-lg hover:brightness-95`}
+              onClick={menu.fn}
             >
               {menu.icon}
-              <div
-                className={`pl-2 ${menu.name === "Clear Canvas" && "text-board-red"}`}
-              >
-                {menu.name}
-              </div>
-            </div>
+              <div className="pl-2">{menu.name}</div>
+            </button>
           ))}
         </div>
       )}
