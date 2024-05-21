@@ -2,8 +2,8 @@
 import Canvas from "@/components/room/Canvas";
 import Toolbar from "@/components/room/Toolbar";
 import Properties from "@/components/room/properties/Properties";
-import Brush from "@/utils/room/tools";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Menu from "@/components/room/Menu";
 
 const PROPERTIES = {
   size: 5,
@@ -14,15 +14,12 @@ const PROPERTIES = {
 
 const Page = () => {
   const [tools, setTools] = useState(PROPERTIES);
-  const brush = new Brush();
 
-  useEffect(() => {
-    brush.updateBrush(tools);
-  });
   return (
     <div className="w-screen h-screen bg-board-blue-100 relative">
+      <Menu />
       <Toolbar tools={tools} setTools={setTools} />
-      <Canvas brush={brush} tools={tools} setTools={setTools} />
+      <Canvas tools={tools} setTools={setTools} />
       <Properties tools={tools} setTools={setTools} />
     </div>
   );

@@ -1,4 +1,4 @@
-import { FaPencilAlt, FaPaintBrush } from "react-icons/fa";
+import { FaPencilAlt } from "react-icons/fa";
 import { BsFillEraserFill } from "react-icons/bs";
 
 const style = "text-lg";
