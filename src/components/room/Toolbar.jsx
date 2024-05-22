@@ -1,6 +1,7 @@
 import { TOOLS } from "@/data/room/tools";
+import { IoArrowUndo } from "react-icons/io5";
 
-const Toolbar = ({ tools, setTools }) => {
+const Toolbar = ({ tools, setTools, handleUndo }) => {
   return (
     <div className="absolute flex flex-col bg-white drop-shadow-lg rounded-xl gap-y-2 px-1.5 py-1.5 left-5 bottom-[50%]">
       {TOOLS.map((tool, index) => (
@@ -13,6 +14,14 @@ const Toolbar = ({ tools, setTools }) => {
           <div className="absolute bottom-1.5 right-2 text-xs">{index}</div>
         </button>
       ))}
+      <div className="border-t">
+        <button
+          onClick={handleUndo}
+          className="p-3.5 text-black hover:text-black/50"
+        >
+          <IoArrowUndo />
+        </button>
+      </div>
     </div>
   );
 };

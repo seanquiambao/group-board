@@ -94,7 +94,9 @@ const Page = () => {
     return TOOLS[tool];
   };
 
-  const { canvasRef, onMouseDown, clear } = useDraw(currentTool(tools.tool));
+  const { canvasRef, onMouseDown, clear, undo } = useDraw(
+    currentTool(tools.tool),
+  );
 
   return (
     <div className="w-screen h-screen bg-board-blue-100 relative">
@@ -102,7 +104,7 @@ const Page = () => {
         <Popup popup={popup} setPopup={setPopup} onClick={popup.onClick} />
       )}
       <Menu clearFn={clear} popup={popup} setPopup={setPopup} />
-      <Toolbar tools={tools} setTools={setTools} />
+      <Toolbar tools={tools} setTools={setTools} handleUndo={undo} />
       <Canvas canvasRef={canvasRef} onMouseDown={onMouseDown} />
       <Properties tools={tools} setTools={setTools} />
     </div>
