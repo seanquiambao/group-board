@@ -1,5 +1,6 @@
 "use client;";
 import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 export const useDraw = (onDraw) => {
   const [mouseDown, setMouseDown] = useState(false);
@@ -35,8 +36,10 @@ export const useDraw = (onDraw) => {
   };
 
   const undo = () => {
-    const { canvas, ctx } = canvasCheck();
-    if (step <= 0) return;
+    if (step <= 0) {
+      toast("⚠️ Can not undo any further.");
+      return;
+    }
     setHistory((prev) => prev.slice(0, -1));
     setStep((prev) => prev - 1);
   };
