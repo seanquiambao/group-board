@@ -48,7 +48,7 @@ export const useDraw = (onDraw) => {
     const { canvas, ctx } = canvasCheck();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     setHistory([]);
-    setStep(0);
+    setStep(-1);
   };
 
   useEffect(() => {

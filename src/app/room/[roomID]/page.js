@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { api } from "@/utils/api";
 import Fault from "@/utils/fault";
+import Room from "@/components/room/Room";
 
 const Page = ({ params }) => {
   const [room, setRoom] = useState(false);
@@ -23,9 +24,7 @@ const Page = ({ params }) => {
   }, [roomID]);
   return (
     <div className="flex items-center justify-center w-screen h-screen">
-      {room && (
-        <div className="text-2xl text-board-blue-200 font-bold">{roomID}</div>
-      )}
+      {room && <Room />}
       {error && (
         <div className="text-2xl text-board-red font-bold">Invalid Room ID</div>
       )}
