@@ -6,7 +6,7 @@ export const useDraw = (onDraw) => {
   const canvasRef = useRef(null);
   const prevPoint = useRef(null);
   const [history, setHistory] = useState([]);
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(-1);
 
   const onMouseDown = () => setMouseDown(true);
   const canvasCheck = () => {
@@ -20,7 +20,12 @@ export const useDraw = (onDraw) => {
 
   const addUndo = () => {
     const { canvas, ctx } = canvasCheck();
-    if (step > 5) {
+    if (step < 0) {
+      const blank = ctx.createImageData(canvas.width, canvas.height);
+      setHistory((prev) => [...prev, blank]);
+      setStep((prev) => prev + 1);
+    }
+    if (step > 4) {
       setHistory((prev) => prev.slice(1));
       setStep((prev) => prev - 1);
     }
@@ -63,10 +68,6 @@ export const useDraw = (onDraw) => {
       const imgData = history[history.length - 1];
       ctx.putImageData(imgData, 0, 0);
     }
-
-    console.log("STEP:", step);
-    console.log("HISTORY:", history);
-
     const computePointInCanvas = (e) => {
       const canvas = canvasRef.current;
       if (!canvas) {
