@@ -39,7 +39,7 @@ const Room = () => {
     patternCanvas.height = pattern.size;
     const patternCtx = patternCanvas.getContext("2d");
     const bgColor = pattern.inverse === 0 ? "white" : tools.color;
-    const pixelColor = bgColor === "white" ? tools.color : white;
+    const pixelColor = bgColor === "white" ? tools.color : "white";
 
     patternCtx.fillStyle = bgColor;
     patternCtx.fillRect(0, 0, pattern.size, pattern.size);
