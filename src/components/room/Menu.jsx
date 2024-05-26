@@ -6,7 +6,7 @@ import { HiOutlinePlusCircle } from "react-icons/hi2";
 
 const iconStyle = "text-lg";
 
-const Menu = ({ clearFn, popup, setPopup }) => {
+const Menu = ({ clearFn, saveFn, popup, setPopup }) => {
   const [show, setShow] = useState(false);
 
   const confirmClear = () => {
@@ -24,7 +24,7 @@ const Menu = ({ clearFn, popup, setPopup }) => {
       name: "Save Art",
       icon: <MdSaveAlt className={iconStyle} />,
       style: "",
-      fn: confirmClear,
+      fn: saveFn,
     },
     {
       name: "Post your Art",

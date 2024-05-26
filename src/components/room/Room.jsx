@@ -8,6 +8,8 @@ import Menu from "@/components/room/Menu";
 import { distanceBetween, angleBetween } from "@/utils/math";
 import { PATTERNS } from "@/data/room/pattern";
 import Popup from "@/components/Popup";
+import { api } from "@/utils/api";
+import toast from "react-hot-toast";
 
 const PROPERTIES = {
   size: 5,
@@ -25,7 +27,7 @@ const POPUP = {
   button: "",
 };
 
-const Room = () => {
+const Room = ({ roomID }) => {
   const [tools, setTools] = useState(PROPERTIES);
   const [popup, setPopup] = useState(POPUP);
 
@@ -97,12 +99,34 @@ const Room = () => {
   const { canvasRef, onMouseDown, clear, undo } = useDraw(
     currentTool(tools.tool),
   );
+
+  const save = () => {
+    if (!canvasRef.current) {
+      toast("error");
+      return;
+    }
+    const img = canvasRef.current.toDataURL("image/png");
+    api({
+      method: "PUT",
+      url: `/api/room?roomID=${roomID}`,
+      body: {
+        img: img,
+      },
+    }).then((response) => {
+      if (response.message !== "OK") {
+        toast("oopsies");
+        return;
+      }
+      toast("yay");
+    });
+  };
+
   return (
     <div className="w-screen h-screen bg-black/10 relative">
       {popup.visible && (
         <Popup popup={popup} setPopup={setPopup} onClick={popup.onClick} />
       )}
-      <Menu clearFn={clear} popup={popup} setPopup={setPopup} />
+      <Menu clearFn={clear} saveFn={save} popup={popup} setPopup={setPopup} />
       <Toolbar tools={tools} setTools={setTools} handleUndo={undo} />
       <Canvas canvasRef={canvasRef} onMouseDown={onMouseDown} />
       <Properties tools={tools} setTools={setTools} />
