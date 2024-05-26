@@ -24,7 +24,7 @@ const Page = ({ params }) => {
   }, [roomID]);
   return (
     <div className="flex items-center justify-center w-screen h-screen">
-      {room && <Room />}
+      {room && <Room roomID={roomID} />}
       {error && (
         <div className="text-2xl text-board-red font-bold">Invalid Room ID</div>
       )}
