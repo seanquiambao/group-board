@@ -6,8 +6,6 @@ import { useSession } from "next-auth/react";
 import { api } from "@/utils/api";
 import { toast } from "react-hot-toast";
 import { useState, useEffect } from "react";
-import Fault from "@/utils/fault";
-import useSWR from "swr";
 import Popup from "@/components/Popup";
 
 const handleCreate = () => {
@@ -28,8 +26,6 @@ const handleDelete = (value) => {
     .catch(() => toast("❌ Internal Server Error"));
 };
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
 const POPUP = {
   title: "",
   message: "",
@@ -40,13 +36,18 @@ const POPUP = {
 };
 
 const Dashboard = () => {
-  const { data, error } = useSWR("/api/dashboard", fetcher);
   const { data: session } = useSession();
-  const [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useState(null);
   const [popup, setPopup] = useState(POPUP);
-  if (error) {
-    throw new Fault(500, "Internal Server Error", "Contact Developers");
-  }
+
+  const load = async () => {
+    api({
+      method: "GET",
+      url: "/api/dashboard",
+    }).then((response) => {
+      setRooms(response.items.rooms);
+    });
+  };
 
   const confirmDelete = (value) => {
     setPopup({
@@ -58,6 +59,10 @@ const Dashboard = () => {
       button: "clear",
     });
   };
+
+  useEffect(() => {
+    load();
+  }, []);
 
   return (
     <div className="flex flex-col items-start justify-center ml-[10%] h-2/3 gap-y-6">
@@ -77,18 +82,17 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="text-black text-4xl font-semibold">Your Rooms</div>
-      {error && <div>Something went wrong</div>}
-      {!data && <div>Loading</div>}
-      {data && (
+      {!rooms && <div>Loading</div>}
+      {rooms && (
         <div className="flex flex-row gap-x-4 w-full items-center">
-          {data.items.rooms?.map((room, index) => (
+          {rooms.map((room, index) => (
             <Card
               key={index}
               id={room}
               handleDelete={() => confirmDelete(room)}
             />
           ))}
-          {data.items.rooms.length < 3 && <Create handleClick={handleCreate} />}
+          {rooms.length < 3 && <Create handleClick={handleCreate} />}
         </div>
       )}
     </div>
