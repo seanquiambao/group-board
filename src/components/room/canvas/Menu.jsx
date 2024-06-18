@@ -21,13 +21,7 @@ const Menu = ({ clearFn, popup, setPopup }) => {
   };
   const MENU = [
     {
-      name: "Save Art",
-      icon: <MdSaveAlt className={iconStyle} />,
-      style: "",
-      fn: confirmClear,
-    },
-    {
-      name: "Post your Art",
+      name: "Leave Room",
       icon: <HiOutlinePlusCircle className={iconStyle} />,
       style: "",
       fn: confirmClear,

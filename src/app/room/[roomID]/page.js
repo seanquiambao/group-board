@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { api } from "@/utils/api";
 import Fault from "@/utils/fault";
-import Room from "@/components/room/Room";
+import Room from "@/components/room/canvas/Room";
 
 const Page = ({ params }) => {
   const [room, setRoom] = useState(false);

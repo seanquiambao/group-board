@@ -1,8 +1,9 @@
-import Room from "@/components/room/Room";
+import Room from "@/components/room/canvas/Room";
 
 const Page = () => {
   return (
-    <div>
+    <div className="w-3/4">
+      <Room />
       <Room />
     </div>
   );

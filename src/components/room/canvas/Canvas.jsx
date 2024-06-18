@@ -1,14 +1,10 @@
-"use client";
-import Canvas from "@/components/room/Canvas";
-import Toolbar from "@/components/room/Toolbar";
-import Properties from "@/components/room/properties/Properties";
-import { useState } from "react";
 import { useDraw } from "@/hooks/useDraw";
-import Menu from "@/components/room/Menu";
+import Menu from "@/components/room/canvas/Menu";
 import { distanceBetween, angleBetween } from "@/utils/math";
 import { PATTERNS } from "@/data/room/pattern";
-import Popup from "@/components/Popup";
-
+import Toolbar from "@/components/room/canvas/Toolbar";
+import Properties from "@/components/room/properties/Properties";
+import { useState } from "react";
 const PROPERTIES = {
   size: 5,
   color: "#000000",
@@ -16,18 +12,8 @@ const PROPERTIES = {
   pattern: 0,
 };
 
-const POPUP = {
-  title: "",
-  message: "",
-  color: "",
-  visible: false,
-  onClick: () => {},
-  button: "",
-};
-
-const Room = () => {
+const Canvas = ({ popup, setPopup }) => {
   const [tools, setTools] = useState(PROPERTIES);
-  const [popup, setPopup] = useState(POPUP);
 
   const generatePattern = (index) => {
     let patternCanvas = document.createElement("canvas");
@@ -97,17 +83,22 @@ const Room = () => {
   const { canvasRef, onMouseDown, clear, undo } = useDraw(
     currentTool(tools.tool),
   );
+
   return (
-    <div className="w-screen h-screen bg-black/10 relative">
-      {popup.visible && (
-        <Popup popup={popup} setPopup={setPopup} onClick={popup.onClick} />
-      )}
+    <div className="flex justify-center items-center h-full">
       <Menu clearFn={clear} popup={popup} setPopup={setPopup} />
       <Toolbar tools={tools} setTools={setTools} handleUndo={undo} />
-      <Canvas canvasRef={canvasRef} onMouseDown={onMouseDown} />
+      <canvas
+        onMouseDown={onMouseDown}
+        ref={canvasRef}
+        width="800"
+        height="500"
+        className="bg-white"
+        style={{ imageRendering: "pixelated", width: 800, height: 500 }}
+      />
       <Properties tools={tools} setTools={setTools} />
     </div>
   );
 };
 
-export default Room;
+export default Canvas;
