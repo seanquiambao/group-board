@@ -35,7 +35,7 @@ const Menu = ({ clearFn, popup, setPopup }) => {
   ];
 
   return (
-    <div className="absolute flex flex-col w-1/12 gap-y-5 items-center top-5 right-0">
+    <div className="absolute flex flex-col gap-y-5 top-5 left-5">
       <button
         onClick={() => setShow(!show)}
         className="flex w-12 h-12 bg-white rounded-xl items-center justify-center drop-shadow-md hover:brightness-95"

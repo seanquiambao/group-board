@@ -85,7 +85,7 @@ const Canvas = ({ popup, setPopup }) => {
   );
 
   return (
-    <div className="flex justify-center items-center h-full">
+    <div className="flex w-full justify-center items-center h-full">
       <Menu clearFn={clear} popup={popup} setPopup={setPopup} />
       <Toolbar tools={tools} setTools={setTools} handleUndo={undo} />
       <canvas

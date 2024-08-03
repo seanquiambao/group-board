@@ -4,7 +4,6 @@ const Page = () => {
   return (
     <div className="w-3/4">
       <Room />
-      <Room />
     </div>
   );
 };
